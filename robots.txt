@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /home-assets
+Disallow: /cgi-bin/
+Sitemap: https://support.avner.sg/sitemap.xml

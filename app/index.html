@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>ATS | Avner's Technical Support</title>
+
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,600,700,700i" rel="stylesheet" type="text/css">
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="../css/css-bootstrap.min.css" rel="stylesheet">
+        <link href="../css/css-all.min.css" rel="stylesheet">
+        <link href="../css/toastr-toastr.min.css" rel="stylesheet">  
+
+      
+        <!-- Theme Styles -->
+        <link href="../css/css-lime.min.css" rel="stylesheet">
+        <link href="../css/themes-admin2.css" rel="stylesheet">
+        <link href="../css/css-custom.css" rel="stylesheet">
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="//www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+            
+        <!-- include firebase database -->
+        <script src="//www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+
+    </head>
+    <body>
+        <div class="loader" style="background-color: #121212!important">
+            <div class="spinner-grow text-primary" role="status" style="color: #1ED760!important">
+                <span class="sr-only" >Loading...</span>
+            </div>
+        </div>
+        
+        
+        <div class="lime-header" style="padding-top: 15px;">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="#" style="font-size: 3rem"><img width="150" src="../images/ATS-wide.png"><img></a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                </li><li><a class="dropdown-item" href="../login/">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="lime-container">
+            <div class="lime-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card bg-info text-white greeting">
+                                <div class="card-body">
+                                    <div class="dashboard-info row">
+                                        <div class="info-text col-md-6">
+                                            <h5 style="color: #000;" class="card-title">Welcome back, <span id="user" style="color: #000;"><span>!</h5>
+                                            <p style="font-weight: 500; color: #000;">Follow these 3 simple steps to have your problem solved in no time</p>
+                                            <ul style="font-weight: 400">
+                                                <li style="color: #000;">Purchase a service and show proof</li>
+                                                <li style="color: #000;">Inform Avner about your issue</li>
+                                                <li style="color: #000;">Sit back and relax while your issue is being solved</li>
+                                            </ul>
+                                        </div>
+                                        <div class="info-image col-md-6"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+                        <div class="col-md-4">
+                            <div class="card stat-card">
+                                <div class="card-body" id="balance">
+                                </div>
+                            </div>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card stat-card service">
+                                <div class="card-body">
+                                    <h5 class="card-title">Basic Support</h5>
+                                    <h2 class="float-right">1 SP</h2>
+                                    <p>For minor technical issues</p>
+                                </div>
+                                <button type="button" onclick="basicSupport()" class="btn btn-primary-2 purchase" style="margin-top: 20px">PURCHASE</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card stat-card service">
+                                <div class="card-body">
+                                    <h5 class="card-title">Premium Support</h5>
+                                    <h2 class="float-right">2 SP</h2>
+                                    <p>For complex technical issues</p>
+                                </div>
+                                <button type="button" onclick="premiumSupport()" class="btn btn-primary-2 purchase" style="margin-top: 20px">PURCHASE</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="font-size: 2rem; padding: 0px 20px;">Top-up Pricing</h5>
+                                    <div class="table-responsive">
+                                        <table class="table topup">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Product</th>
+                                                    <th scope="col">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>5 SP</td>
+                                                    <td>$4.99</td>
+                                                    <td><button class="btn btn-primary-2" onclick="topUp(5, '$4.99')">PURCHASE</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>20 SP</td>
+                                                    <td>$14.99</td>
+                                                    <td><button class="btn btn-primary-2" onclick="topUp(20, '$14.99')">PURCHASE</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>50 SP</td>
+                                                    <td>$34.99</td>
+                                                    <td><button class="btn btn-primary-2" onclick="topUp(50, '$34.99')">PURCHASE</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>      
+                                </div>
+                            </div>
+                        </div>
+
+                    
+                    
+                </div>
+            </div>
+            <div class="lime-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="footer-text">2022 &copy; Avner's Technical Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Javascripts -->
+        <script src="../js/jquery-jquery-3.1.0.min.js"></script>
+        <script src="../js/bootstrap-popper.min.js"></script>
+        <script src="../js/js-bootstrap.min.js"></script>
+        <script src="../js/jquery-slimscroll-jquery.slimscroll.min.js"></script>
+        <script src="../js/chartjs-chart.min.js"></script>
+        <script src="../js/dist-apexcharts.min.js"></script>
+        <script src="../js/toastr-toastr.min.js"></script>
+        <script src="../js/js-lime.min.js"></script>
+        <script src="../js/main.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+</html>
